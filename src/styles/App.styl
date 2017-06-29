@@ -1,0 +1,54 @@
+@import 'variables/variables.styl';
+
+body {
+	// background $colorLightPoint
+	height 100%
+	width 100%
+	font-family $mainFont
+}
+
+.root {
+	display flex
+	width 100%
+	min-height 100%
+	justify-content flex-start
+  align-items stretch
+  align-content stretch
+}
+
+.app {
+	display flex
+	flex-direction column
+	width 100%
+	
+	&-wrapper {
+		display flex
+		position relative
+		height 100%
+	}
+	
+	&-content {
+		display: inline-block
+		vertical-align: top
+		padding 0
+		width 100%
+		flex-grow 1
+		position relative
+		
+		&-genres {
+			position absolute
+			top 0
+			left 0
+		}
+	}
+	
+	&-menu {
+		display: inline-block
+		vertical-align: top
+		border-right 2px solid $mainColor
+	}
+}
+
+.fixed {
+	overflow hidden
+}

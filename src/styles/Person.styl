@@ -1,0 +1,47 @@
+@import 'variables/variables.styl';
+
+.person {
+	height 100%
+	display flex
+	flex-direction column
+	align-items stretch
+	position relative
+	&-item {
+		&-wrapper {
+			display flex
+		}
+		
+		&__image {
+			border-right 2px solid $mainColor
+			
+			img {
+				display block
+			}
+		}
+		
+		&__header {
+			background rgba($colorLightPoint, .5)
+		}
+		
+		&__info {
+			color $colorDarkPoint
+			padding 10px
+		}
+		
+		&__content {
+			padding 10px 15px
+			&-movies {				
+				&-item {
+					display flex
+					align-items center
+					align-content stretch
+					
+					div {
+						order 1
+						display flex
+					}
+				}
+			}		
+		}
+	}
+}

@@ -1,0 +1,54 @@
+@import 'variables/variables.styl';
+
+.genres {
+	&-list {
+		border-top 2px solid red
+		z-index 2
+		overflow hidden
+		
+		&-wrapper {
+			width 100%
+		}
+		
+		&__item {
+			box-shadow 1px 1px 1px 0px $mainColor
+			// border-right 1px solid $mainColor
+			// border-bottom 1px solid $mainColor
+			padding 10px
+			display flex
+			align-items center
+			align-content center
+			// background $colorLightPoint
+			flex-grow 1
+			
+			&-link {
+				display block
+				margin 0 auto
+				text-transform uppercase
+				// font-family $secondFont
+				font-weight 900
+			}
+		}
+	}
+	
+	&-item {
+		&-items {
+			display flex
+			flex-wrap wrap
+		}
+		
+		&-header {
+			padding 0 10px 10px
+			
+			span {
+				border-bottom 2px solid $mainColor
+			}
+		}
+	}
+}
+
+.visible {
+	display flex
+	flex-wrap wrap
+	width 100%
+}

@@ -1,0 +1,276 @@
+@import 'variables/variables.styl';
+
+.single {
+	display flex
+	height 100%
+	width 100%
+	align-items center
+
+	&-item {
+		background rgba($colorDarkPoint, 1)
+		display flex
+		align-items stretch
+		
+		&__wrapper {
+			width 100%
+			// padding-right 40px
+			text-align center
+			background-image linear-gradient(rgba($colorDarkPoint,.85) 15%,rgba($colorDarkPoint,.2) 50%, rgba($colorDarkPoint, 1) 90%)
+			background-attachment fixed
+		}
+		
+		&__inner {
+			padding 0 50px 0 100px
+			display inline-block
+			text-align left
+			
+			&-bottom {
+				display flex
+				border-top 2px solid $mainColor
+				
+				&-wrapper {
+					padding-right 40px
+				}
+			}
+		}
+		
+		&__info {
+			display flex
+			border-right 2px solid $mainColor
+			color white
+			position relative
+			// font-size 30px
+			padding 50px 0
+		}
+		
+		&__poster {
+			
+			display inline-block
+			
+			img {
+				display block
+				max-width 300px
+				max-height 450px
+				border-left 2px solid $mainColor
+			}
+		}
+		
+		&__description {
+			padding 0 25px
+			display inline-block			
+			display flex
+			flex-direction column
+			
+			&-header {
+				// order 1
+				
+				&-text {
+					color $$colorLightPoint
+					font-size 2em
+					border-bottom 2px solid $mainColor
+				}
+			}
+			
+			&-tagline {
+				// order 1
+				border-bottom 2px solid $mainColor
+				margin-bottom 10px
+				
+				&-text {
+					display inline-block
+					width auto
+					padding 10px
+					color $mainColor
+					font-size 1.3em
+				}
+			}
+			
+			&-overview {
+				margin-bottom 15px
+				
+				&-text {
+					font-weight 300
+					font-size 20px
+				}
+			}
+			
+			&-details {
+				margin 40px 0 30px
+				width 100%
+				align-self flex-end
+				background rgba($colorDarkPoint, .5)
+				padding 5px 10px
+				
+				&__cost, &__date, &__runtime {
+					display flex
+					margin-bottom 15px
+					
+					&-value {
+						color $mainColor
+						font-size 18px
+					}
+					
+					&-budget, &-revenue, &-profit {
+						display inline-block
+						flex-grow 1
+					}
+					
+					&-profit {
+						display none
+					}
+				}
+			}
+		}
+		
+		&__popularity {
+			position absolute
+			top 0
+			right 0
+			padding 10px
+			width: auto
+			background $mainColor
+			color $colorDarkPoint
+			font-weight 300
+			border-radius 0 0 0 5px
+			
+			&-value {
+				padding 5px
+				text-align: center
+			}
+		}
+		
+		&__genres {
+			padding 5px
+			background rgba($colorDarkPoint, .5)
+			
+			&-link {
+				display inline-block
+			}
+		}
+		
+		&__cast {
+			width 100%
+			margin 0 0 30px
+			
+			&-header {
+				color $mainColor
+				padding 10px
+			}
+			
+			&-wrapper {
+				display flex
+				border-top 2px solid $mainColor
+			}
+			
+			&-item {
+				width 20%
+				margin-right 5px
+				margin-top 10px
+				display flex
+				flex-direction column
+				
+				&:last-child {
+					margin-right 0
+				}
+				
+				a {
+					display block
+					width 100%
+					height 100%
+					
+					img {
+						display block
+						width 100%
+						height 100%
+						min-height 255px
+					}
+				}
+				
+				&__actor {
+					display flex
+					flex-direction column
+					background $colorLightPoint
+					flex-grow 1
+					padding 10px
+					
+					&-name {
+						margin-bottom 5px
+					}
+					
+					&-character {
+						font-weight 100
+						color $colorDarkPoint
+					}
+				}
+			}
+		}
+		
+		&__video {
+			&-header {
+				border-top 2px solid $mainColor
+				border-bottom 2px solid $mainColor
+				color $mainColor
+				padding 10px
+			}
+			
+			&-frames {
+				&-wrapper {
+					// background rgba($colorDarkPoint, .5)
+					// padding 10px
+					width 100%
+				}
+				
+				&__item {
+					flex-grow 1
+					
+					&__header {
+						margin-bottom 10px
+					}
+					&__frame {
+						// border 2px solid $mainColor
+					}
+				}
+				
+				&__content {
+					margin-top 10px
+					margin-bottom 30px
+					display flex
+					
+					iframe {
+						flex-grow 1
+						min-height 320px
+					}
+				}
+			}
+		}
+		
+		&__similar {
+			&-header {
+				border-top 2px solid $mainColor
+				color $mainColor
+				padding 10px
+			}
+			
+			&-movies {
+				&__content {
+					display flex
+					flex-wrap wrap
+					border-top 2px solid $mainColor
+				}
+			}
+		}
+	}
+}
+
+/*todo: put next styles to separate file*/
+
+.loader {
+	position absolute
+	top 50%
+	left 50%
+	transform translate(-50%, -50%)
+}
+
+.negative {
+	color red
+}
