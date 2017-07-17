@@ -12,7 +12,7 @@ import {
 import * as types from '../constants/actionTypes';
 
 export function* watchMedia() {
-	yield takeLatest(types.FETCH_DATA_SUCCESS, loadData);
+	yield takeLatest(types.GETTING_DATA_SUCCESS, loadData);
 	yield takeLatest(types.GETTING_GENRES_SUCCESS, loadGenres);
 	yield takeLatest(types.GETTING_CONFIG_SUCCESS, loadConfig);
 	yield takeLatest(types.GETTING_CURRENT_MOVIE_SUCCESS, loadCurrentMovie);

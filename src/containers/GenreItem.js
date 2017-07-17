@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { requestGenreItems } from '../actions/requestActions';
 import Movie from '../components/Movie';
-// import Pagination from './Pagination';
-import { Loader } from '../components/Loader';
+import Pagination from '../components/Pagination';
+import Loader from '../components/Loader';
+import { pagesLimit } from '../constants/constantsApi';
 
 /*todo: запилить подгрузку фильмов по данному жанру со страничными*/
 
@@ -72,7 +74,7 @@ class GenreItem extends React.Component {
 		const { genres } = this.props;
 		const { id } = this.props.params;
 
-		let genreIndex = genres.findIndex(index => index.id == id);
+		let genreIndex = genres.findIndex(index => index.id === +id);
 		return genres[genreIndex].name;
 	}
 
@@ -93,6 +95,16 @@ class GenreItem extends React.Component {
 						<Loader />
 					</div>
 				}
+				<div className="pagination">
+					{
+						<Pagination
+							pagesLimit={pagesLimit}
+							itemsPerPage={9}
+							currentPage={+this.state.indexPage}
+							url={this.state.url}
+						/>
+					}
+				</div>
 			</div>
 		)
 	};

@@ -5,20 +5,20 @@ import { connect } from 'react-redux';
 import { mediaRequest } from '../actions/requestActions';
 
 import Movie from '../components/Movie';
-import { Loader } from '../components/Loader';
+import Loader from '../components/Loader';
 import Pagination from '../components/Pagination';
+// import Pages from '../components/Pages';
+import { pagesLimit } from '../constants/constantsApi';
 
 class MoviesList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			allowRender: false,
 			pageOfItems: [],
 			indexPage: props.params.page || props.page,
 			parent: 'movies',
 			url: 'movies'
 		}
-		this.onChangePage = this.onChangePage.bind(this);
 	};
 
 	componentWillMount() {
@@ -32,9 +32,6 @@ class MoviesList extends React.Component {
 		const { indexPage } = this.state;
 
 		this.props.getTheData(apiKey, bool, indexPage);
-		this.setState({
-			allowRender: true,
-		});
 	};
 
 	componentWillReceiveProps(newProps, newState) {
@@ -54,12 +51,6 @@ class MoviesList extends React.Component {
 
 	shouldComponentUpdate(nextProps) {
 		return nextProps !== this.props;
-	};
-
-	onChangePage(index) {
-		this.setState({
-			index: index,
-		});
 	};
 
 	movieDisplay() {
@@ -99,30 +90,25 @@ class MoviesList extends React.Component {
 				<h1 className="movies-header">
 					<span>MoviesList</span>
 				</h1>
-				
 				<div className="movies-list">
 					{
-						this.state.allowRender ?
+						this.props.loaded ?
 						this.movieDisplay() :
 						<div className="loader">
 							<Loader />
 						</div>
 					}
 				</div>
-				{
-					this.state.allowRender
-					&&
-					<div className="pagination">
+				<div className="pagination">
+					{
 						<Pagination
-							pages={this.props.totalPages}
-							onChangePage={this.onChangePage}
-							middlePage={this.state.indexPage}
-							router={this.props.router}
-							parent={this.state.parent}
+							pagesLimit={pagesLimit}
+							itemsPerPage={9}
+							currentPage={+this.state.indexPage}
 							url={this.state.url}
 						/>
-					</div>
-				}
+					}
+				</div>
 			</div>
 		)
 	};

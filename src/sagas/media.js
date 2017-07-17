@@ -26,6 +26,7 @@ export function* loadData(action) {
 		const config = yield call(configureFetch, action.key);
 
 		yield put({ type: types.GETTING_DATA, loaded: {movies, genres, config, action} });
+		// yield put({ type: types.GETTING_DATA_RENDER });
 
 	} catch(error) {
 		yield put({ type: types.GETTING_DATA_FAILED, error });
@@ -63,7 +64,9 @@ export function* loadGenreItems(action) {
 		const genreItems = yield call(genreItemsFetch, action.id, action.key, action.bool);
 		const config = yield call(configureFetch, action.key);
 		const genres = yield call(moviesGenresFetch, action.key);
+
 		yield put({ type: types.GETTING_GENRE_ITEMS, loaded: { genreItems, config, genres } });
+		yield put({ type: types.GETTING_GENRE_ITEMS_RENDER });
 
 	} catch(error) {
 		yield put({ type: types.GETTING_GENRE_ITEMS_FAILED, error });
@@ -103,6 +106,7 @@ export function* loadCurrentMovie(action) {
 		const similar = yield call(similarMoviesFetch, action.id, action.key, action.page);
 
 		yield put({ type: types.GETTING_CURRENT_MOVIE, loaded: { current, config, credits, video, similar } });
+		// yield put({ type: types.GETTING_CURRENT_MOVIE_RENDER });
 
 	} catch(error) {
 		yield put({ type: types.GETTING_CURRENT_MOVIE_FAILED })

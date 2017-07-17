@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { personRequest } from '../actions/requestActions';
-import { Loader } from '../components/Loader';
+import Loader from '../components/Loader';
 import PersonItem from '../components/PersonItem';
 
 class Person extends React.Component {

@@ -4,56 +4,48 @@ import { connect } from 'react-redux';
 
 import { currentMovieRequest } from '../actions/requestActions';
 import MovieItem from '../components/MovieItem';
-import { Loader } from '../components/Loader';
+import Loader from '../components/Loader';
 
 class SingleMovie extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			id: '',
-			allowRender: false,
 			parent: 'single'
 		};
 	};
 
 	componentWillMount() {
+		console.log('componentWillMount');
 		this.setState({
 			id: this.props.params.id,
 		});
 	};
 
 	componentDidMount() {
+		console.log('componentDidMount');
 		const { id } = this.state;
 		const { apiKey } = this.props;
 
 		this.props.getCurrentMovie(id, apiKey);
-		this.setState({
-			allowRender: true
-		});
 	};
 
 	componentWillReceiveProps(newProps) {
+		console.log('componentWillReceiveProps');
 		this.setState({
 			id: newProps.params.id,
 		});
 	};
 
-	componentWillUpdate() {
-		this.setState({
-			allowRender: !this.state.allowRender
-		});
-	};
-
 	componentDidUpdate(prevProps, prevState) {
+		console.log('componentDidUpdate');
 		if (this.state.id !== prevState.id) {
 			this.props.getCurrentMovie(this.props.params.id, this.props.apiKey);
-			this.setState({
-				allowRender: !this.state.allowRender,
-			});
 		}
 	};
 
 	shouldComponentUpdate(nextProps) {
+		console.log('shouldComponentUpdate');
 		return nextProps !== this.props;
 	};
 
@@ -74,10 +66,11 @@ class SingleMovie extends React.Component {
 	};
 
 	render() {
+		console.log('render');
 		return(
 			<div className="single">
 				{
-					this.state.allowRender ?
+					this.props.loaded ?
 					this.movieDisplay() :
 					<div className="loader">
 						<Loader />
@@ -93,8 +86,10 @@ SingleMovie.propTypes = {
 };
 
 function mapStateToProps(state) {
+	// console.log(state);
 	return {
 		movie: state.currentMovieRequest.movie,
+		loaded: state.currentMovieRequest.loaded,
 		apiKey: state.mediaRequestData.apiKey,
 	}
 }

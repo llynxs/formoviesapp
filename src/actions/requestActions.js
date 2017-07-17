@@ -15,7 +15,7 @@ export const personRequest = (id, key) => ({
 })
 
 export const mediaRequest = (key, bool, page) => ({
-	type: types.FETCH_DATA_SUCCESS,
+	type: types.GETTING_DATA_SUCCESS,
 	key,
 	bool,
 	page,

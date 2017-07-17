@@ -14,7 +14,7 @@ const configureStore = createStore(
 	rootReducers,
 	defaultState,
 	composeWithDevTools(
-		applyMiddleware(sagaMiddleware, loggerMiddleware)
+		applyMiddleware(sagaMiddleware/*, loggerMiddleware*/)
 	),
 );
 

@@ -2,8 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import { MenuItem } from 'material-ui/Menu';
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 
 import { requestGenresData } from '../actions/requestActions';
+
+
+/*
+	запилить запрос на список жанров в компонент меню, чтобы не слать запрос на каждый клик,
+	а данные уже были иннициализированны
+*/
 
 class GenresList extends React.Component {
 	constructor() {
@@ -43,15 +51,15 @@ class GenresList extends React.Component {
 		});
 
 		return (
-			<div className={genreListClass} onClick={this.hadleOpener}>
+			<div className={genreListClass}>
 				<div className="genres-list-wrapper">
 					{
 						this.state.allowRender ?
 						genres.map((genre, i) => {
 							return (
-								<div className="genres-list__item" key={i}>
-									<Link to={`/genres/${genre.id}`} onClick={this.handleClose} className="genres-list__item-link">{genre.name}</Link>
-								</div>
+								<ListItem className="genres-list__item" key={i}>
+									<Link to={`/genres/${genre.id}`} className="genres-list__item-link">{genre.name}</Link>
+								</ListItem>
 							);
 						})
 						: <div>{'...loading'}</div>

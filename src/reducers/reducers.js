@@ -12,12 +12,18 @@ export function mediaRequestData(state = initialState, action) {
 				loaded: true,
 				type: action.type,
 			}
-		case types.FETCH_DATA_SUCCESS:
+		case types.GETTING_DATA_SUCCESS:
 			return {
 				...state,
 				loaded: false,
 				type: action.type,
-			}		
+			}
+		// case types.GETTING_DATA_RENDER:
+		// 	return {
+		// 		...state,
+		// 		loaded: true,
+		// 		type: action.type,
+		// 	}
 		default: return state;
 	}
 }
@@ -48,10 +54,18 @@ export function genreItems(state = initialState.genreItems, action) {
 				genres:action.loaded.genres.genres,
 				page: action.loaded.page,
 				type: action.type,
+				loaded: false,
 			}
 		case types.GETTING_GENRE_ITEMS_SUCCESS:
 			return {
 				...state,
+				loaded: false,
+				type: action.type,
+			}
+		case types.GETTING_GENRE_ITEMS_RENDER:
+			return {
+				...state,
+				loaded: true,
 				type: action.type,
 			}
 		default: return state;
@@ -107,6 +121,12 @@ export function currentMovieRequest(state = initialState.movie, action) {
 				loaded: false,
 				type: action.type,
 			}
+		// case types.GETTING_CURRENT_MOVIE_RENDER:
+		// 	return {
+		// 		...state,
+		// 		loaded: true,
+		// 		type: action.type,
+		// 	}
 		default: return state;
 	}
 }

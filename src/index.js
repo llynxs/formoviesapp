@@ -4,9 +4,9 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+// import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import { MuiThemeProvider, withTheme } from 'material-ui/styles';
+// import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
@@ -20,7 +20,7 @@ export const history = syncHistoryWithStore(browserHistory, store);
 injectTapEventPlugin();
 
 ReactDOM.render(
-	<MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+	<MuiThemeProvider>
 		<Provider store={store}>
 			<Router history={history} routes={routes} />
 		</Provider>

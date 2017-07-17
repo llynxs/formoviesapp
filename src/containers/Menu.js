@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { Link, IndexLink } from 'react-router';
 import Drawer from 'material-ui/Drawer';
 import Paper from 'material-ui/Paper';
-import {Menu as Menuer} from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
+import { Menu as MenuHolder } from 'material-ui/Menu';
+import {MenuItem} from 'material-ui/Menu';
+
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 
 import { mediaRequest } from '../actions/requestActions';
 
@@ -25,13 +27,22 @@ class Menu extends React.Component {
 		this.setState({
 			open: !this.state.open
 		});
-	}
+	};
 
 	handleClose() {
 		this.setState({
 			open: false
 		});
-	}
+	};
+
+	toggleDrawer = (side, open) => {
+		const drawerState = {};
+		drawerState[side] = open;
+		this.setState({ open: drawerState });
+	};
+
+	handleLeftOpen = () => this.toggleDrawer('left', true);
+	handleLeftClose = () => this.toggleDrawer('left', false);
 
 	handleIndexChange() {
 		const { bool, apiKey, page } = this.props;
@@ -53,30 +64,30 @@ class Menu extends React.Component {
 		return (
 			<div className="menu">
 				<div className="menu-wrapper">
-				<Paper style={style} zDepth={0}>
-					<Menuer className="menu-list">
-						<MenuItem style={itemStyle} className="menu-list__item">
+					<List className="menu-list">
+						<ListItem style={itemStyle} className="menu-list__item">
 							<IndexLink to={`/`} onClick={this.handleIndexChange} className="menu-list__item-link">Home</IndexLink>
-						</MenuItem>
-						<MenuItem style={itemStyle} className="menu-list__item">
-							<Link onTouchTap={this.handleToggle} className="menu-list__item-link">
+						</ListItem>
+						<ListItem style={itemStyle} className="menu-list__item">
+							<Link onClick={this.handleLeftOpen} className="menu-list__item-link">
 								Genres
 							</Link>
-						</MenuItem>
-						<MenuItem style={itemStyle} className="menu-list__item">
+						</ListItem>
+						<ListItem style={itemStyle} className="menu-list__item">
 							<Link className="menu-list__item-link">Sorting</Link>
-						</MenuItem>
-						<MenuItem style={itemStyle} className="menu-list__item">
+						</ListItem>
+						<ListItem style={itemStyle} className="menu-list__item">
 							<Link className="menu-list__item-link">Collections</Link>
-						</MenuItem>
-					</Menuer>
-					</Paper>
+						</ListItem>
+					</List>
 				</div>
 				<Drawer
 					docked={false}
 					width={200}
-					open={this.state.open}
-					onRequestChange={(open) => this.setState({open})}
+					// open={this.state.open}
+					open={this.state.open.left}
+					onRequestClose={this.handleLeftClose}
+					onClick={this.handleLeftClose}
 				>
 					<GenresList />
 				</Drawer>
@@ -86,6 +97,7 @@ class Menu extends React.Component {
 }
 
 function mapStateToProps(state) {
+	// console.log(state);
 	return {
 		bool: state.mediaRequestData.bool,
 		apiKey: state.mediaRequestData.apiKey,

@@ -83,9 +83,6 @@ body {
   vertical-align: top;
   border-right: 2px solid #8cfffa;
 }
-.fixed {
-  overflow: hidden;
-}
 .menu-list__item {
   display: block;
   text-align: center;
@@ -154,9 +151,6 @@ body {
 }
 .movies-item__description-header h4 {
   color: #fff;
-}
-.active {
-  background: #f00;
 }
 .pagination {
   text-align: center;
@@ -561,4 +555,51 @@ a.twitter-timeline:focus {
   border: 1px solid #ccc;
   border-radius: 2px;
   margin: 0 5px;
+}
+.pagination {
+  padding: 20px;
+  background: rgba(255,255,255,0.25);
+}
+.pagination-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pagination-list-pages {
+  display: flex;
+}
+.pagination-list-item {
+  padding: 0 !important;
+  min-width: auto !important;
+  min-height: auto !important;
+  margin: 0 2px !important;
+  height: 100% !important;
+  position: relative;
+}
+.pagination-list-item span {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.pagination-list-item__link {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+.pagination-item-button {
+  background: #fff !important;
+}
+.pagination-item-button__link {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+.pagination .pagination-item-button {
+  min-width: auto;
+  background: #00f !important;
+}
+.active {
+  background: rgba(140,255,250,0.2) !important;
 }
