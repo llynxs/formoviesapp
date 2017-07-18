@@ -16,14 +16,12 @@ class SingleMovie extends React.Component {
 	};
 
 	componentWillMount() {
-		console.log('componentWillMount');
 		this.setState({
 			id: this.props.params.id,
 		});
 	};
 
 	componentDidMount() {
-		console.log('componentDidMount');
 		const { id } = this.state;
 		const { apiKey } = this.props;
 
@@ -31,21 +29,18 @@ class SingleMovie extends React.Component {
 	};
 
 	componentWillReceiveProps(newProps) {
-		console.log('componentWillReceiveProps');
 		this.setState({
 			id: newProps.params.id,
 		});
 	};
 
 	componentDidUpdate(prevProps, prevState) {
-		console.log('componentDidUpdate');
 		if (this.state.id !== prevState.id) {
 			this.props.getCurrentMovie(this.props.params.id, this.props.apiKey);
 		}
 	};
 
 	shouldComponentUpdate(nextProps) {
-		console.log('shouldComponentUpdate');
 		return nextProps !== this.props;
 	};
 
@@ -66,7 +61,6 @@ class SingleMovie extends React.Component {
 	};
 
 	render() {
-		console.log('render');
 		return(
 			<div className="single">
 				{
@@ -86,7 +80,6 @@ SingleMovie.propTypes = {
 };
 
 function mapStateToProps(state) {
-	// console.log(state);
 	return {
 		movie: state.currentMovieRequest.movie,
 		loaded: state.currentMovieRequest.loaded,

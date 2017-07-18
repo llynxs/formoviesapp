@@ -53,19 +53,14 @@ export function genreItems(state = initialState.genreItems, action) {
 				config: action.loaded.config,
 				genres:action.loaded.genres.genres,
 				page: action.loaded.page,
+				ololo: action,
+				loaded: true,
 				type: action.type,
-				loaded: false,
 			}
 		case types.GETTING_GENRE_ITEMS_SUCCESS:
 			return {
 				...state,
 				loaded: false,
-				type: action.type,
-			}
-		case types.GETTING_GENRE_ITEMS_RENDER:
-			return {
-				...state,
-				loaded: true,
 				type: action.type,
 			}
 		default: return state;
@@ -78,11 +73,13 @@ export function genresData(state = initialState.genres, action) {
 			return {
 				...state,
 				genres: action.loaded.genres,
+				loaded: true,
 				type: action.type,
 			}
 		case types.GETTING_GENRES_SUCCESS:
 			return {
 				...state,
+				loaded: false,
 				type: action.type,
 			}	
 		default: return state;

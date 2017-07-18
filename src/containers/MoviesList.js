@@ -7,14 +7,12 @@ import { mediaRequest } from '../actions/requestActions';
 import Movie from '../components/Movie';
 import Loader from '../components/Loader';
 import Pagination from '../components/Pagination';
-// import Pages from '../components/Pages';
 import { pagesLimit } from '../constants/constantsApi';
 
 class MoviesList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			pageOfItems: [],
 			indexPage: props.params.page || props.page,
 			parent: 'movies',
 			url: 'movies'
@@ -90,6 +88,16 @@ class MoviesList extends React.Component {
 				<h1 className="movies-header">
 					<span>MoviesList</span>
 				</h1>
+				<div className="pagination">
+					{
+						<Pagination
+							pagesLimit={pagesLimit}
+							itemsPerPage={13}
+							currentPage={+this.state.indexPage}
+							url={this.state.url}
+						/>
+					}
+				</div>
 				<div className="movies-list">
 					{
 						this.props.loaded ?
@@ -99,16 +107,7 @@ class MoviesList extends React.Component {
 						</div>
 					}
 				</div>
-				<div className="pagination">
-					{
-						<Pagination
-							pagesLimit={pagesLimit}
-							itemsPerPage={9}
-							currentPage={+this.state.indexPage}
-							url={this.state.url}
-						/>
-					}
-				</div>
+				
 			</div>
 		)
 	};
@@ -131,7 +130,7 @@ function mapStateToProps(state) {
 		bool: state.mediaRequestData.bool,
 		apiKey: state.mediaRequestData.apiKey,
 		loaded: state.mediaRequestData.loaded,
-		totalPages: state.mediaRequestData.movies.total_pages
+		totalPages: state.mediaRequestData.movies.total_pages,
 	}
 }
 

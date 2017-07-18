@@ -1,12 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { requestGenreItems } from '../actions/requestActions';
 import Movie from '../components/Movie';
-import Pagination from '../components/Pagination';
 import Loader from '../components/Loader';
-import { pagesLimit } from '../constants/constantsApi';
 
 /*todo: запилить подгрузку фильмов по данному жанру со страничными*/
 
@@ -14,42 +12,44 @@ class GenreItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			allowRender: false,
 			parent: 'genres',
-			pageOfItems: [],
-			indexPage: props.params.page,
+			indexPage: props.params.id,
 		}
 	}
+
+	componentWillMount() {
+		this.setState({
+			indexPage: this.props.params.id || this.state.indexPage,
+		});
+	}
+
 	componentDidMount() {
 		const { apiKey, bool } = this.props;
 		const { id } = this.props.params;
 
 		this.props.getGenreItems(id, apiKey, bool);
+	};
+
+	componentWillReceiveProps(newProps, newState) {
 		this.setState({
-			allowRender: true,
+			indexPage: newProps.params.id || this.props.id,
 		});
 	};
 
-	componentWillUpdate() {
-		this.setState({
-			allowRender: !this.state.allowRender
-		});
-	};
+	componentDidUpdate(prevProps, prevState) {
+		const { apiKey, bool } = this.props;
+		const { id } = this.props.params;
 
-	componentDidUpdate() {
-		this.setState({
-			allowRender: !this.state.allowRender
-		});
+		if (prevState.indexPage !== this.state.indexPage) {
+			this.props.getGenreItems(id, apiKey, bool);
+			this.setState({
+				indexPage: this.state.indexPage,
+			});
+		}
 	};
 
 	shouldComponentUpdate(nextProps) {
 		return nextProps !== this.props;
-	};
-
-	onChangePage(pageOfItems) {
-		this.setState({
-			pageOfItems: pageOfItems
-		});
 	};
 
 	displayGenreItems() {
@@ -82,7 +82,7 @@ class GenreItem extends React.Component {
 		return (
 			<div className="genres-item-list">
 				{
-					this.state.allowRender ?
+					this.props.loaded ?
 					<div className="genres-item-wrapper">
 						<div className="genres-item-header">
 							<h1><span>{this.displayGenreName()}</span></h1>
@@ -95,16 +95,6 @@ class GenreItem extends React.Component {
 						<Loader />
 					</div>
 				}
-				<div className="pagination">
-					{
-						<Pagination
-							pagesLimit={pagesLimit}
-							itemsPerPage={9}
-							currentPage={+this.state.indexPage}
-							url={this.state.url}
-						/>
-					}
-				</div>
 			</div>
 		)
 	};
@@ -117,6 +107,7 @@ function mapStateToProps(state) {
 		apiKey: state.mediaRequestData.apiKey,
 		genres: state.genreItems.genres,
 		bool: state.mediaRequestData.bool,
+		loaded: state.genreItems.loaded,
 	}
 }
 

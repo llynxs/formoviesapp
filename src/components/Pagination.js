@@ -22,14 +22,6 @@ const styleSheet = createStyleSheet('Pagination', theme => ({
 }));
 
 class Pagination extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			display: 10,
-			number: +props.currentPage,
-		}
-	}
-
 	pageConverter() {
 		let pageArray = [];
 
@@ -71,14 +63,14 @@ class Pagination extends React.Component {
 		);
 
 		return pageRange.map((item, i) => {
-			const genreListClass = classNames({
+			const pagesListClass = classNames({
 				'pagination-list-item__link': true,
 				active: item === page,
 			});
 
 			return (
 				<Button key={i} className="pagination-list-item">
-					<Link className={genreListClass} to={`/${url}/page=${item}`}>
+					<Link className={pagesListClass} to={`/${url}/page=${item}`}>
 						{item}
 					</Link>
 				</Button>
@@ -88,27 +80,22 @@ class Pagination extends React.Component {
 
 	render() {
 		const classes = this.props.classes;
-		const { url } = this.props;
-		/*todo: fix +1/-1 pages*/
+		const { url, currentPage, pagesLimit } = this.props;
+
+		/*todo: fix markup*/
 
 		return (
 			<div className="pagination-list">
 				<Button className="pagination-list-item">
-					<Link to={`/${url}/page=${1}`} className="pagination-list-item__link">First</Link>
-				</Button>
-				<Button className="pagination-list-item">
-					<Link to={`/${url}/page=${+this.props.currentPage - 1}`} className="pagination-list-item__link">Prev</Link>
+					<Link to={`/${url}/page=${1}`} className="pagination-list-item__link">{'<<'}</Link>
 				</Button>
 				<div className="pagination-list-pages">
 					{
-						this.setPage(+this.props.currentPage)
+						this.setPage(currentPage)
 					}
 				</div>
 				<Button className="pagination-list-item">
-					<Link to={`/${url}/page=${+this.props.currentPage + 1}`} className="pagination-list-item__link">Next</Link>
-				</Button>
-				<Button className="pagination-list-item">
-					<Link to={`/${url}/page=${this.props.pagesLimit}`} className="pagination-list-item__link">Last</Link>
+					<Link to={`/${url}/page=${pagesLimit}`} className="pagination-list-item__link">{'>>'}</Link>
 				</Button>
 			</div>
 		);}

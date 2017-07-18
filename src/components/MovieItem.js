@@ -11,26 +11,6 @@ import Media from './Media';
 import Sidebar from './Sidebar';
 
 class MovieItem extends React.Component {
-	displayMedia() {
-		const { video } = this.props;
-
-		const Media = video.results.map((item, i) => {
-			return (
-				<div key={i} className="single-item__video-frames__item">
-					<div className="single-item__video-frames__item__header">{item.name}</div>
-					<iframe
-						src={`http://www.youtube.com/embed/${item.key}`}
-						frameBorder='0'
-						className="single-item__video-frames__item__frame"
-						allowFullScreen
-					>
-					</iframe>
-				</div>
-			)
-		});
-		return Media;
-	};
-
 	displaySimilarMovies() {
 		const { similar, config, parent } = this.props;
 		const imageSize = config.images.poster_sizes[1];

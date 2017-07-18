@@ -603,3 +603,16 @@ a.twitter-timeline:focus {
 .active {
   background: rgba(140,255,250,0.2) !important;
 }
+.disabled {
+  position: relative;
+}
+.disabled:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: #f00;
+}

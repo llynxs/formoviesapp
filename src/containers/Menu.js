@@ -2,13 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, IndexLink } from 'react-router';
 import Drawer from 'material-ui/Drawer';
-import Paper from 'material-ui/Paper';
-import { Menu as MenuHolder } from 'material-ui/Menu';
-import {MenuItem} from 'material-ui/Menu';
+// import { Menu as MenuHolder } from 'material-ui/Menu';
 
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import List, { ListItem } from 'material-ui/List';
 
-import { mediaRequest } from '../actions/requestActions';
+import { mediaRequest, requestGenresData } from '../actions/requestActions';
 
 import GenresList from '../components/GenresList';
 
@@ -21,6 +19,11 @@ class Menu extends React.Component {
 		this.handleToggle = this.handleToggle.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 		this.handleIndexChange = this.handleIndexChange.bind(this);
+	}
+
+	componentDidMount() {
+		const { apiKey } = this.props;
+		this.props.getGenresData(apiKey);
 	}
 
 	handleToggle() {
@@ -37,6 +40,7 @@ class Menu extends React.Component {
 
 	toggleDrawer = (side, open) => {
 		const drawerState = {};
+
 		drawerState[side] = open;
 		this.setState({ open: drawerState });
 	};
@@ -51,10 +55,10 @@ class Menu extends React.Component {
 	}
 
 	render() {
-		const style = {
-			display: 'inline-block',
-			margin: '0',
-		};
+		// const style = {
+		// 	display: 'inline-block',
+		// 	margin: '0',
+		// };
 
 		const itemStyle = {
 			padding: '0',
@@ -81,33 +85,34 @@ class Menu extends React.Component {
 						</ListItem>
 					</List>
 				</div>
-				<Drawer
-					docked={false}
-					width={200}
-					// open={this.state.open}
-					open={this.state.open.left}
-					onRequestClose={this.handleLeftClose}
-					onClick={this.handleLeftClose}
-				>
-					<GenresList />
-				</Drawer>
+					<Drawer
+						width={200}
+						open={this.state.open.left}
+						onRequestClose={this.handleLeftClose}
+						onClick={this.handleLeftClose}
+					>
+						<GenresList genres={this.props.genresList}/>
+					</Drawer>
+				
 			</div>
 		)
 	}
 }
 
 function mapStateToProps(state) {
-	// console.log(state);
 	return {
 		bool: state.mediaRequestData.bool,
 		apiKey: state.mediaRequestData.apiKey,
 		page: state.mediaRequestData.page,
+		genresList: state.genresData.genres,
+		loaded: state.genresData.loaded,
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		getTheData: (key, bool, page) => dispatch(mediaRequest(key, bool, page)),
+		getGenresData: (key) => dispatch(requestGenresData(key)),
 	}
 }
 
