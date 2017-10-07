@@ -1,8 +1,5 @@
 import React from 'react';
-// import { Link } from 'react-router';
-// import classNames from 'classnames';
 
-// import Slider from './Slider';
 import Movie from './Movie';
 import Cast from './Cast';
 import Info from './Info';

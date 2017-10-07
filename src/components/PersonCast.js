@@ -4,32 +4,38 @@ import { Link } from 'react-router';
 import { stable } from '../constants/Methods';
 
 import noImage from '../media/noImage.png';
+import PersonMovies from './PersonMovies';
 
-class PersonMovies extends React.Component {
+class PersonCast extends React.Component {
 	render() {
-		const { movies, config } = this.props;
+		const { cast, config } = this.props;
 		const imageSize = config.images.poster_sizes[0];
 
-		return (
-			<ul className="person-item-list">
-				{
-					stable(movies.cast, (a, b) => {
-						let releaseDateOne = !!a.release_date ? Date.parse(a.release_date) : 0;
-						let releaseDateTwo = !!b.release_date ? Date.parse(b.release_date) : 0;
+		/*track api calls and link redirection*/
 
-						if (releaseDateOne < releaseDateTwo) return -1;
-						if (releaseDateOne > releaseDateTwo) return 1;
-						return 0;
-					})
+		return (
+			<ul>
+				{
+					stable(cast.cast,	(a, b) => {
+							let firstCrit = !!a.first_air_date ? Date.parse(a.first_air_date) : 0;
+							let secCrit = !!b.first_air_date ? Date.parse(b.first_air_date) : 0;
+
+							if (firstCrit < secCrit) return -1;
+							if (firstCrit > secCrit) return 1;
+							return 0;
+						}
+					)
 					.reverse()
 					.map((elem, i) => {
-						let releaseDate = !!elem.release_date ?	elem.release_date.substring(0, elem.release_date.indexOf('-')) : 'N/A';
+						let airDate = !!elem.first_air_date ?
+													elem.first_air_date.substring(0, elem.first_air_date.indexOf('-')) :
+													'N/A';
 
 						return (
 							<li className="person-item__content-movies-item" key={i}>
 								<div className="person-item__content-movies-item__date">
 									{
-										elem.release_date ? releaseDate : 'N/A'
+										elem.first_air_date ? airDate : 'N/A'
 									}
 								</div>
 								<div className="person-item__content-movies-item__image">
@@ -47,7 +53,7 @@ class PersonMovies extends React.Component {
 									</Link>
 								</div>
 								<div className="person-item__content-movies-item__info">
-									<Link to={`/movie/${elem.id}`}>{elem.title}</Link>
+									<Link to={`/movie/${elem.id}`}>{elem.title || elem.name}</Link>
 									<span>as</span>
 									<div>
 										{
@@ -64,4 +70,4 @@ class PersonMovies extends React.Component {
 	}
 }
 
-export default PersonMovies;
+export default PersonCast;

@@ -7,6 +7,7 @@ import { mediaRequest } from '../actions/requestActions';
 import Movie from '../components/Movie';
 import Loader from '../components/Loader';
 import Pagination from '../components/Pagination';
+import NotFound from '../components/NotFound';
 import { pagesLimit } from '../constants/constantsApi';
 
 class MoviesList extends React.Component {
@@ -85,28 +86,34 @@ class MoviesList extends React.Component {
 	render() {
 		return(
 			<div className="movies-wrapper">
-				<h1 className="movies-header">
-					<span>MoviesList</span>
-				</h1>
-				<div className="movies-list">
-					{
-						this.props.loaded ?
-						this.movieDisplay() :
-						<div className="loader">
-							<Loader />
+				{
+					this.state.indexPage <= pagesLimit ?
+					<div className="movies-wrapper">
+						<h1 className="movies-header">
+							<span>MoviesList</span>
+						</h1>
+						<div className="movies-list">
+							{
+								this.props.loaded ?
+								this.movieDisplay() :
+								<div className="loader">
+									<Loader />
+								</div>
+							}
 						</div>
-					}
-				</div>
-				<div className="pagination">
-					{
-						<Pagination
-							pagesLimit={pagesLimit}
-							itemsPerPage={13}
-							currentPage={+this.state.indexPage}
-							url={this.state.url}
-						/>
-					}
-				</div>
+						<div className="pagination">
+							{
+								<Pagination
+									pagesLimit={pagesLimit}
+									itemsPerPage={13}
+									currentPage={+this.state.indexPage}
+									url={this.state.url}
+								/>
+							}
+						</div>
+					</div> :
+					<NotFound />
+				}
 			</div>
 		)
 	};

@@ -9,6 +9,7 @@ import {
 	configRequest,
 	genreItems,
 	personData,
+	tvRequestData,
 } from './reducers';
 
 // Combines all reducers to a single reducer function
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
 	moviesData,
 	genresData,
 	personData,
+	tvRequestData,
 	routing: routerReducer
 });
 

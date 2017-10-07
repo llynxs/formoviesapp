@@ -1,20 +1,63 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import SwipeableViews from 'react-swipeable-views';
+import AppBar from 'material-ui/AppBar';
+import Tabs, { Tab } from 'material-ui/Tabs';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import classNames from 'classnames';
 
 import PersonMovies from './PersonMovies';
-// import PersonTVShows from './PersonTVShows';
+import PersonCast from './PersonCast';
 import noImage from '../media/noImage.png';
+
+/*разбить на компоненты*/
+
+const TabContainer = props =>
+	<div style={{ padding: 0 }}>
+		{props.children}
+	</div>;
+
+TabContainer.propTypes = {
+	children: PropTypes.node.isRequired,
+};
+
+const styleSheet = createStyleSheet('FullWidthTabs', theme => ({
+	root: {
+		backgroundColor: theme.palette.background.paper,
+	},
+}));
 
 class PersonItem extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			type: 'movies',
+			index: 0,
+			hidden: 'false',
 		}
 	}
 
+	handleChange = (event, index) => {
+		this.setState({ index });
+	};
+
+	handleChangeIndex = index => {
+		this.setState({ index });
+	};
+
 	render() {
-		const { person, config, movies } = this.props.personData;
+		const { person, config, movies, personTV } = this.props.personData;
 		const imageSize = config.images.poster_sizes[3];
+
+		console.log(movies);
+		console.log(personTV);
+
+		// console.log(this.props, 'render');
+
+		/*fix tab list*/
+		const tabList = classNames({
+			'tabser': true,
+		})
 
 		return (
 			<div className="person-item">
@@ -103,13 +146,40 @@ class PersonItem extends React.Component {
 							<h4 className="person-item__content-heading">
 								Known for:
 							</h4>
+							<AppBar position="static" color="default" id="tabWrapper">
+								{ movies || personTV ?
+									<Tabs
+										index={this.state.index}
+										onChange={this.handleChange}
+										indicatorColor="primary"
+										textColor="primary"
+									>
+										<Tab label="Movies" />
+										<Tab label="TVs" />
+									</Tabs> :
+									''
+								}
+							</AppBar>
 							<div className="person-item__content-movies-list">
-								<h3>Cast</h3>
-								<PersonMovies
-									movies={movies}
-									config={config}
-									imageSize={imageSize}
-								/>
+								<SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} id="swiper">
+									<TabContainer className={tabList}>
+										<div>
+											<PersonCast
+												config={config}
+												cast={personTV}
+											/>
+										</div>
+									</TabContainer>
+									<TabContainer>
+										<div className="tabber">
+											
+											<PersonMovies
+												movies={movies}
+												config={config}
+											/>
+										</div>
+									</TabContainer>
+								</SwipeableViews>
 							</div>
 							{
 								movies.crew.length ?
@@ -126,4 +196,4 @@ class PersonItem extends React.Component {
 	}
 }
 
-export default PersonItem;
+export default withStyles(styleSheet)(PersonItem);

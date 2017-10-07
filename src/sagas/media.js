@@ -1,6 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import {
 	moviesDiscoverFetch,
+	tvDiscoverFetch,
 	moviesGenresFetch,
 	configureFetch,
 	currentMovieFetch,
@@ -15,22 +16,40 @@ import {
 import * as types from '../constants/actionTypes';
 
 export function* loadData(action) {
-	try {		
+	try {
 		const genres = yield call(moviesGenresFetch, action.key);
 		const movies = yield call(
 			moviesDiscoverFetch,
 			action.key,
 			action.bool,
-			action.page
+			action.page,
 		);
 		const config = yield call(configureFetch, action.key);
 
-		yield put({ type: types.GETTING_DATA, loaded: {movies, genres, config, action} });
+		yield put({ type: types.GETTING_DATA, loaded: { movies, genres, config, action } });
 
 	} catch(error) {
 		yield put({ type: types.GETTING_DATA_FAILED, error });
 	}
 };
+
+export function* loadTVShows(action) {
+	try {
+		const tvs = yield call(
+			tvDiscoverFetch,
+			action.key,
+			action.bool,
+			action.page,
+		);
+
+		const config = yield call(configureFetch, action.key);
+
+		yield put({ type: types.GETTING_TV, loaded: { tvs, config } });
+
+	} catch(error) {
+		yield put({ type: types.GETTING_TV_FAILED, error });
+	}
+}
 
 export function* loadMoreMovies(action) {
 	try {

@@ -6,13 +6,15 @@ import {
 	loadCurrentMovie,
 	loadMoreMovies,
 	loadGenreItems,
-	loadPerson
+	loadPerson,
+	loadTVShows
 } from './media';
 
 import * as types from '../constants/actionTypes';
 
 export function* watchMedia() {
 	yield takeLatest(types.GETTING_DATA_SUCCESS, loadData);
+	yield takeLatest(types.GETTING_TV_SUCCESS, loadTVShows);
 	yield takeLatest(types.GETTING_GENRES_SUCCESS, loadGenres);
 	yield takeLatest(types.GETTING_CONFIG_SUCCESS, loadConfig);
 	yield takeLatest(types.GETTING_CURRENT_MOVIE_SUCCESS, loadCurrentMovie);

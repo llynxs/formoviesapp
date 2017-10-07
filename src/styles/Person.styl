@@ -6,6 +6,7 @@
 	flex-direction column
 	align-items stretch
 	position relative
+	
 	&-item {
 		&-wrapper {
 			display flex
@@ -30,7 +31,11 @@
 		
 		&__content {
 			padding 10px 15px
-			&-movies {				
+			
+			&-movies {
+				&-list {
+					overflow-y hidden
+				}
 				&-item {
 					display flex
 					align-items center

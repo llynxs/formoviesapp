@@ -55,13 +55,7 @@ class Menu extends React.Component {
 	}
 
 	render() {
-		// const style = {
-		// 	display: 'inline-block',
-		// 	margin: '0',
-		// };
-
 		const itemStyle = {
-			padding: '0',
 			textAlign: 'left'
 		}
 
@@ -70,7 +64,9 @@ class Menu extends React.Component {
 				<div className="menu-wrapper">
 					<List className="menu-list">
 						<ListItem style={itemStyle} className="menu-list__item">
-							<IndexLink to={`/`} onClick={this.handleIndexChange} className="menu-list__item-link">Home</IndexLink>
+							<IndexLink to={`/`} onClick={this.handleIndexChange} className="menu-list__item-link">
+								Home
+							</IndexLink>
 						</ListItem>
 						<ListItem style={itemStyle} className="menu-list__item">
 							<Link onClick={this.handleLeftOpen} className="menu-list__item-link">
@@ -78,22 +74,30 @@ class Menu extends React.Component {
 							</Link>
 						</ListItem>
 						<ListItem style={itemStyle} className="menu-list__item">
-							<Link className="menu-list__item-link">Sorting</Link>
+							<Link className="menu-list__item-link">
+								Sorting
+							</Link>
 						</ListItem>
 						<ListItem style={itemStyle} className="menu-list__item">
-							<Link className="menu-list__item-link">Collections</Link>
+							<Link className="menu-list__item-link">
+								Collections
+							</Link>
+						</ListItem>
+						<ListItem style={itemStyle} className="menu-list__item">
+							<Link to={`/tv/page=1`} className="menu-list__item-link">
+								TV Shows
+							</Link>
 						</ListItem>
 					</List>
 				</div>
-					<Drawer
-						width={200}
-						open={this.state.open.left}
-						onRequestClose={this.handleLeftClose}
-						onClick={this.handleLeftClose}
-					>
-						<GenresList genres={this.props.genresList}/>
-					</Drawer>
-				
+				<Drawer
+					width={200}
+					open={this.state.open.left}
+					onRequestClose={this.handleLeftClose}
+					onClick={this.handleLeftClose}
+				>
+					<GenresList genres={this.props.genresList}/>
+				</Drawer>
 			</div>
 		)
 	}

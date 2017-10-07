@@ -9,6 +9,7 @@ export function mediaRequestData(state = initialState, action) {
 				genres: action.loaded.genres,
 				movies: action.loaded.movies,
 				config: action.loaded.config,
+				log: action.loaded,
 				loaded: true,
 				type: action.type,
 			}
@@ -18,12 +19,40 @@ export function mediaRequestData(state = initialState, action) {
 				loaded: false,
 				type: action.type,
 			}
-		// case types.GETTING_DATA_RENDER:
-		// 	return {
-		// 		...state,
-		// 		loaded: true,
-		// 		type: action.type,
-		// 	}
+		case types.GETTING_DATA_FAILED:
+			return {
+				...state,
+				stack: action.error,
+				loaded: false,
+				type: action.type,
+			}
+		default: return state;
+	}
+}
+
+export function tvRequestData(state = initialState.tvs, action) {
+	switch(action.type) {
+		case types.GETTING_TV:
+			return {
+				...state,
+				loaded: true,
+				config: action.loaded.config,
+				tvs: action.loaded.tvs.results,
+				page: action.loaded.tvs.page,
+			}
+		case types.GETTING_TV_SUCCESS:
+			return {
+				...state,
+				loaded: false,
+				type: action.type,
+			}
+		case types.GETTING_TV_FAILED:
+			return {
+				...state,
+				error: action.error,
+				loaded: false,
+				type: action.type,
+			}
 		default: return state;
 	}
 }
@@ -118,12 +147,6 @@ export function currentMovieRequest(state = initialState.movie, action) {
 				loaded: false,
 				type: action.type,
 			}
-		// case types.GETTING_CURRENT_MOVIE_RENDER:
-		// 	return {
-		// 		...state,
-		// 		loaded: true,
-		// 		type: action.type,
-		// 	}
 		default: return state;
 	}
 }

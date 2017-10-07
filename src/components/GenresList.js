@@ -6,13 +6,9 @@ import List, { ListItem } from 'material-ui/List';
 class GenresList extends React.Component {
 	render() {
 		const { genres } = this.props;
-		const genreListClass = classNames({
-			'genres-list': true,
-			visible: this.props.isOpen,
-		});
 
 		return (
-			<div className={genreListClass}>
+			<div className="genres-list">
 				<List className="genres-list-wrapper">
 					{
 						genres.map((genre, i) => {

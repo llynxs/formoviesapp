@@ -2,6 +2,7 @@ export const initialState = {
 	movies: {},
 	genres: {},
 	movie: {},
+	tvs: {},
 	config: {},
 	genreItems: {},
 	person: {},

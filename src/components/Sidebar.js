@@ -7,7 +7,6 @@ class Sidebar extends React.Component {
 
 		return (
 			<div className="sidebar-container">
-				Sidebar component here
 				<div className="sidebar-title">
 					<h4>Original Title</h4>
 					<div>{movie.original_title}</div>

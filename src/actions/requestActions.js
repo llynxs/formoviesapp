@@ -8,6 +8,13 @@ export const requestMoviesData = (key, bool, page) => ({
 	page,
 });
 
+export const requestTVShows = (key, bool, page) => ({
+	type: types.GETTING_TV_SUCCESS,
+	key,
+	bool,
+	page,
+});
+
 export const personRequest = (id, key) => ({
 	type: types.GETTING_PERSON_SUCCESS,
 	id,
