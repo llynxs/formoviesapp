@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import Button from 'material-ui/Button';
 import { Link } from 'react-router';
 
-const styleSheet = createStyleSheet('Pagination', theme => ({
+const styleSheet = theme => ({
 	root: {
 		flexGrow: 1,
 	},
@@ -19,7 +19,7 @@ const styleSheet = createStyleSheet('Pagination', theme => ({
 	control: {
 		padding: theme.spacing.unit * 2,
 	},
-}));
+});
 
 class Pagination extends React.Component {
 	pageConverter() {

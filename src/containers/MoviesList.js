@@ -88,6 +88,15 @@ class MoviesList extends React.Component {
 				<h1 className="movies-header">
 					<span>MoviesList</span>
 				</h1>
+				<div className="movies-list">
+					{
+						this.props.loaded ?
+						this.movieDisplay() :
+						<div className="loader">
+							<Loader />
+						</div>
+					}
+				</div>
 				<div className="pagination">
 					{
 						<Pagination
@@ -98,16 +107,6 @@ class MoviesList extends React.Component {
 						/>
 					}
 				</div>
-				<div className="movies-list">
-					{
-						this.props.loaded ?
-						this.movieDisplay() :
-						<div className="loader">
-							<Loader />
-						</div>
-					}
-				</div>
-				
 			</div>
 		)
 	};

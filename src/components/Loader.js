@@ -1,12 +1,12 @@
 import React from 'react';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
 
-const styleSheet = createStyleSheet('CircularIndeterminate', theme => ({
+const styleSheet = theme => ({
 	progress: {
 		margin: `0 ${theme.spacing.unit * 2}px`,
 	},
-}));
+});
 
 function Loader(props) {
 	const classes = props.classes;
